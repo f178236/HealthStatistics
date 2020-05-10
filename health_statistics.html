@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Statistics by File Data</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <link rel="shortcut icon" href="img/logo_pHS_icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/byFile.css">
+    <link rel="stylesheet" href="css/histogram.css">
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="nav npc">
+            <a href="#" class="nav-item" active-color="orange" onclick="loadAJAX()">COVID-19 </a>
+            <a href="#" class="nav-item" active-color="green">Heart Disease</a>
+            <a href="#" class="nav-item" active-color="blue">Maleria</a>
+            <a href="#" class="nav-item" active-color="red">HIV</a>
+            <a href="#" class="nav-item" active-color="rebeccapurple">Cancer</a>
+        
+            <span class="nav-indicator"></span>
+          </nav>
+        
+          <!-- mobile -->
+          <header class="cd-header">
+            <div class="header-wrapper">
+                <div class="logo-wrap">
+                    <a href="#" class="hover-target"><span>div</span>dev</a>
+                </div>
+                <div class="nav-but-wrap">
+                    <div class="menu-icon hover-target">
+                        <span class="menu-icon__line menu-icon__line-left"></span>
+                        <span class="menu-icon__line"></span>
+                        <span class="menu-icon__line menu-icon__line-right"></span>
+                    </div>					
+                </div>					
+            </div>				
+        </header>
+              <div class="nav-overlay"></div>
+          <div class="nav nmb">
+            <div class="nav__content">
+                <ul class="nav__list">
+                    <li class="nav__list-item"><a href="#" class="hover-target">Home</a></li>
+                    <li class="nav__list-item"><a href="#" class="hover-target">New Post</a></li>
+                    <li class="nav__list-item"><a href="#" class="hover-target">Profile</a></li>
+                    <li class="nav__list-item"><a href="#" class="hover-target">SignUp</a></li>
+                    <li class="nav__list-item"><a href="#" class="hover-target">Login</a></li>
+                    <li class="nav__list-item"><a href="#" class="hover-target">Contact</a></li>
+                    <li class="nav__list-item"><a href="#" class="hover-target">Donations</a></li>
+                </ul>
+            </div>
+            
+        </div>	
+        </header>
+
+
+   
+
+    <div id="data" class="fileData">
+        <h2 id="filename">Data</h2>
+        <div class="tableContainer">
+            <table id="table"></table>
+        </div>
+    </div>
+
+    <div class="bgBorder">
+        <div class="container">
+            <div id="ftColumn" class="selectColumn">
+                <label for="">Enter Column Name to Find Frequency Table</label> <br>
+                <input type="text" name="column" id="userInput"/>
+                 <button type="submit" class="button" id="calculateFrequencyTable">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="frequencyTablesContainer" id="frequencyTablesContainer">
+            <!-- <div id="frequencyTable" class="tableContainer">
+                <h2>Frequency Table</h2>
+                <table id="freqTab">
+                    <tr>
+                        <th>Class</th>
+                        <th>Frequency</th>
+                        <th>Commulative Frequency</th>
+                        <th>Relative Frequency</th>
+                        <th>Relative Frequency %</th>
+                        <th>Commulative Relative Frequency</th>
+                    </tr>
+                    <tr>
+                        <th>Class</th>
+                        <th>Frequency</th>
+                        <th>Commulative Frequency</th>
+                        <th>Relative Frequency</th>
+                        <th>Relative Frequency %</th>
+                        <th>Commulative Relative Frequency</th>
+                    </tr>
+                </table>
+            </div> -->
+            <!-- <table id="freqTab">
+                <tr>
+                    <th>Mean</th>
+                    <th>Standard Deviation</th>
+                </tr>
+                <tr>
+                    <td id="mean"></td>
+                    <td id="sd"></td>
+                </tr>
+            </table> -->
+        </div>
+    </div>
+
+
+    
+    <script src="js/d3.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/chartjs.js"></script>
+    <script src="js/meanAndStandardDeviation.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/histogram.js"></script> 
+    <script src="js/navbar.js"></script> 
+    <!-- <script src="js/loadfile.js"></script>  -->
+</body>
+
+</html>
