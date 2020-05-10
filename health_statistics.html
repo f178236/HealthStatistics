@@ -20,11 +20,11 @@
 
     <header>
         <nav class="nav npc">
-            <a href="#" class="nav-item" active-color="orange" onclick="loadAJAX()">COVID-19 </a>
-            <a href="#" class="nav-item" active-color="green">Heart Disease</a>
-            <a href="#" class="nav-item" active-color="blue">Maleria</a>
-            <a href="#" class="nav-item" active-color="red">HIV</a>
-            <a href="#" class="nav-item" active-color="rebeccapurple">Cancer</a>
+            <a href="#" class="nav-item" active-color="orange" id="covid">COVID-19 </a>
+            <a href="#" class="nav-item" active-color="green" id="heart_disease">Heart Disease</a>
+            <a href="#" class="nav-item" active-color="blue"id="maleria">Maleria</a>
+            <a href="#" class="nav-item" active-color="red"id="hiv">HIV</a>
+            <a href="#" class="nav-item" active-color="rebeccapurple"id="cancer">Cancer</a>
         
             <span class="nav-indicator"></span>
           </nav>
@@ -65,7 +65,7 @@
    
 
     <div id="data" class="fileData">
-        <h2 id="filename">Data</h2>
+        <h2 id="filename"></h2>
         <div class="tableContainer">
             <table id="table"></table>
         </div>
@@ -83,37 +83,7 @@
 
     <div class="container">
         <div class="frequencyTablesContainer" id="frequencyTablesContainer">
-            <!-- <div id="frequencyTable" class="tableContainer">
-                <h2>Frequency Table</h2>
-                <table id="freqTab">
-                    <tr>
-                        <th>Class</th>
-                        <th>Frequency</th>
-                        <th>Commulative Frequency</th>
-                        <th>Relative Frequency</th>
-                        <th>Relative Frequency %</th>
-                        <th>Commulative Relative Frequency</th>
-                    </tr>
-                    <tr>
-                        <th>Class</th>
-                        <th>Frequency</th>
-                        <th>Commulative Frequency</th>
-                        <th>Relative Frequency</th>
-                        <th>Relative Frequency %</th>
-                        <th>Commulative Relative Frequency</th>
-                    </tr>
-                </table>
-            </div> -->
-            <!-- <table id="freqTab">
-                <tr>
-                    <th>Mean</th>
-                    <th>Standard Deviation</th>
-                </tr>
-                <tr>
-                    <td id="mean"></td>
-                    <td id="sd"></td>
-                </tr>
-            </table> -->
+            <!-- Data will be Populate Dynamically -->
         </div>
     </div>
 
@@ -128,7 +98,6 @@
     <script src="js/table.js"></script>
     <script src="js/histogram.js"></script> 
     <script src="js/navbar.js"></script> 
-    <!-- <script src="js/loadfile.js"></script>  -->
 </body>
 
 </html>

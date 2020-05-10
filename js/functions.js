@@ -1,38 +1,72 @@
-var allTextLines="";
-// .csv Select File Event 
-function loadAJAX() {
+var allTextLines = [];
+var data_location;
+var covid_btn = document.getElementById("covid");
+var heart_disease_btn = document.getElementById("heart_disease");
+var maleria_btn = document.getElementById("maleria");
+var hiv_btn = document.getElementById("hiv");
+var cancer_btn = document.getElementById("cancer");
+
+document.getElementById("ftColumn").style.display= "none";
+
+if (covid_btn.addEventListener) {
+    covid_btn.addEventListener("click", function () {
+        data_location = "data/covid19.csv";
+        loadAjax();
+    });
+}
+
+if (cancer_btn.addEventListener) {
+    cancer_btn.addEventListener("click", function () {
+        data_location = "data/mental_disease.csv";
+        loadAjax();
+    });
+}
+
+//Load file with AJAX at runtime
+function loadAjax() {
     var req = new XMLHttpRequest();
-    req.open('GET', 'data/covid19.csv');
 
-
+    req.open('GET', data_location);
     req.onreadystatechange = function () {
         if (req.readyState === 4 && req.status === 200) {
             allTextLines = req.responseText.split("\n");
-            displayTable(allTextLines);
             
+            document.getElementById("table").innerHTML="";
+            document.getElementById("frequencyTablesContainer").innerHTML="";
+            document.getElementsByClassName("frequencyTablesContainer")[0].innerHTML="";
+            document.getElementById('filename').innerHTML = data_location;
+            document.getElementById("ftColumn").style.display= "block";
+            displayTable(allTextLines);
+
         }
         if (req.readyState != 4 && req.status === 404) {
             var Error = '<div>Table not Found !</div>';
-            document.getElementById('tableListing').innerHTML = Error;
+            document.getElementById('filename').innerHTML = Error;
         }
     };
     req.send();
+
 }
+
+
+
+
 
 // Show File Data
 function displayTable(lines) {
 
     var table = document.getElementById('table');
     var rows = lines.length;
-    var cols = lines[0].length;
+    
 
     for (var i = 0; i < rows; i++) {
         var tr = document.createElement('tr');
         var tds = [];
-        var word=lines[i].split(",");
+        var word = lines[i].split(",");
+        var cols = word.length;
         for (var j = 0; j < cols; j++) {
             tds.push(document.createElement('td'));
-            
+
             tds[j].innerHTML = word[j];
         }
         for (var j = 0; j < cols; j++) {
@@ -45,14 +79,14 @@ function displayTable(lines) {
 // Frequency Table Find Event
 var calculateFrequencyTable = document.getElementById('calculateFrequencyTable');
 calculateFrequencyTable.addEventListener('click', function () {
-    
-  
-    var input=document.getElementById("userInput").value;
+
+
+    var input = document.getElementById("userInput").value;
     var data = allTextLines;
     var rows = data.length;
     var selectedCol;
-  var heading =data[0].split(",");
-    
+    var heading = data[0].split(",");
+
     for (var i = 0; i < rows; i++) {
         if (input == heading[i]) {
             selectedCol = i;
@@ -64,13 +98,13 @@ calculateFrequencyTable.addEventListener('click', function () {
     var myData = [];
 
     for (var i = 1; i < rows; i++) {
-        var Temp= data[i].split(",");
-        
+        var Temp = data[i].split(",");
+
         x = parseInt(Temp[selectedCol]);
         myData.push(x);
     }
- 
-    
+
+
     var table = new Table();
 
     table.addRow();
@@ -117,7 +151,7 @@ calculateFrequencyTable.addEventListener('click', function () {
             table.addCol(crf[i] + " %");
             first = second;
             second += interval;
-            labels.push(i+1);
+            labels.push(i + 1);
         }
     } else {
         for (var i = 0; i < rows; i++) {
@@ -129,7 +163,7 @@ calculateFrequencyTable.addEventListener('click', function () {
             table.addCol(p[i] + " %");
             table.addCol(crf[i] + " %");
             first++;
-            labels.push(i+1);
+            labels.push(i + 1);
         }
     }
 
@@ -141,7 +175,7 @@ calculateFrequencyTable.addEventListener('click', function () {
     table.addCol();
     table.addCol();
 
-    
+
     var meanTable = new Table();
     meanTable.addRow();
     meanTable.addCol('Mean');
@@ -156,18 +190,18 @@ calculateFrequencyTable.addEventListener('click', function () {
 
 
 
-    
+
     if (interval > 0)
         histogram(f, c, interval, max, heading);
-    else{
-        
+    else {
+
         heading = "" + heading + "";
         var title = heading.toLocaleUpperCase();
-        barchart(demo,title,f,labels);
+        barchart(demo, title, f, labels);
     }
 
 
-    
+
 
 });
 
@@ -194,14 +228,14 @@ function histogram(f, c, interval, max, heading) {
     createHistogram(data, maxBin, binInc, title);
 }
 
-function barchart(demo,title,f,labels) {
+function barchart(demo, title, f, labels) {
 
     var canvas = document.createElement('canvas');
     canvas.style.width = "600px";
     canvas.style.height = "600px";
     canvas.style.margin = "auto";
     demo.appendChild(canvas);
- 
+
 
     var id = canvas;
     var data = f;
