@@ -118,10 +118,5 @@ function createHistogram(data, maxBin, binInc, title) {
         .text("Frequency");
 
     // Add title to chart
-    svg.append("text")
-        .attr("class", "title")
-        .attr("transform", "translate(" + (width / 2) + " ," + (-20) + ")")
-        
-        .attr("text-anchor", "middle")
-        .text(title);
+    
 };
