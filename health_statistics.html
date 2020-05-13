@@ -8,7 +8,7 @@
     <title>Statistics by File Data</title>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+        <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
     <link rel="shortcut icon" href="img/logo_pHS_icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/byFile.css">
@@ -71,20 +71,42 @@
         </div>
     </div>
 
-    <div class="bgBorder">
         <div class="container">
             <div id="ftColumn" class="selectColumn">
                 <label for="">Enter Column Name to Find Frequency Table</label> <br>
-                <input type="text" name="column" id="userInput"/>
+                <input type="text" name="column" placeholder="Any Column Name" id="userInput"/>
                  <button type="submit" class="button" id="calculateFrequencyTable">Send</button>
             </div>
         </div>
-    </div>
 
     <div class="container">
         <div class="frequencyTablesContainer" id="frequencyTablesContainer">
             <!-- Data will be Populate Dynamically -->
         </div>
+    </div>
+
+    <div class="t_test_input">
+        <div  class="selectColumn">
+            <h2 for="">  Apply T Test</h2> <br>
+            <input type="text" name="column" placeholder="Any Column Name 1" id="col1_t_test_input"/>
+            
+            <input type="text" name="column"  placeholder="Any Column Name 2" id="col2_t_test_input" /><br>
+            <button type="submit" class="button" id="t_test_btn">Calculate</button>
+        </div>
+       
+        
+    </div>
+
+    <div class="anova_input">
+        <div  class="selectColumn">
+            <h2 for="">  Apply Anova Test</h2> <br>
+            <input type="text" name="column" placeholder="Any Column Name 1" id="col1_anova_input"/>
+            
+            <input type="text" name="column"  placeholder="Any Column Name 2" id="col2_anova_input" /><br>
+            <button type="submit" class="button" id="anova_btn">Calculate</button>
+        </div>
+       
+        
     </div>
 
 
@@ -94,10 +116,12 @@
     <script src="js/chartjs.js"></script>
     <script src="js/meanAndStandardDeviation.js"></script>
     <script src="js/functions.js"></script>
+    <script src="js/CalculateTTest.js"></script> 
     <script src="js/data.js"></script>
     <script src="js/table.js"></script>
     <script src="js/histogram.js"></script> 
-    <script src="js/navbar.js"></script> 
+    <script src="js/navbar.js"></script>
+
 </body>
 
 </html>
