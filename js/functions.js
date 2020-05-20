@@ -5,9 +5,11 @@ var heart_disease_btn = document.getElementById("heart_disease");
 var maleria_btn = document.getElementById("maleria");
 var hiv_btn = document.getElementById("hiv");
 var cancer_btn = document.getElementById("cancer");
+var sleep_btn = document.getElementById("sleep_disorder");
 
 document.getElementById("ftColumn").style.display= "none";
 document.getElementsByClassName("t_test_input")[0].style.display= "none";
+document.getElementsByClassName("t_test_input")[1].style.display= "none";
 document.getElementsByClassName("anova_input")[0].style.display= "none";
 if (covid_btn.addEventListener) {
     covid_btn.addEventListener("click", function () {
@@ -19,6 +21,12 @@ if (covid_btn.addEventListener) {
 if (cancer_btn.addEventListener) {
     cancer_btn.addEventListener("click", function () {
         data_location = "data/mental_disease.csv";
+        loadAjax();
+    });
+}
+if (sleep_btn.addEventListener) {
+    sleep_btn.addEventListener("click", function () {
+        data_location = "data/sleep_disorder.csv";
         loadAjax();
     });
 }
@@ -83,6 +91,7 @@ var calculateFrequencyTable = document.getElementById('calculateFrequencyTable')
 calculateFrequencyTable.addEventListener('click', function () {
 
     document.getElementsByClassName("t_test_input")[0].style.display= "block";
+    document.getElementsByClassName("t_test_input")[1].style.display= "block";
     document.getElementsByClassName("anova_input")[0].style.display= "block";
     var input = document.getElementById("userInput").value;
     var data = allTextLines;
@@ -200,6 +209,7 @@ calculateFrequencyTable.addEventListener('click', function () {
         histogram(f, c, interval, max, heading);
     else {
 
+        alert("Hi");
         heading = "" + heading + "";
         var title = heading.toLocaleUpperCase();
         barchart(demo, title, f, labels);
@@ -207,6 +217,69 @@ calculateFrequencyTable.addEventListener('click', function () {
 
 
     
+
+
+});
+var T_Test_Simple_Btn=document.getElementById("t_test_simple_btn");
+T_Test_Simple_Btn.addEventListener('click',function(){
+    var col1=document.getElementById("col1_t_test_simple_input").value;
+    var data = allTextLines;
+    var rows = data.length;
+    var selectedCol1;
+    var heading = data[0].split(",");
+
+
+    for (var i = 0; i < rows; i++) {
+        if (col1 == heading[i]) {
+            selectedCol1 = i;
+            break;
+        }
+    }
+
+
+
+    var x = "";
+    var col1_data = [];
+
+    for (var i = 1; i < rows; i++) {
+        var Temp = data[i].split(",");
+
+        x = parseInt(Temp[selectedCol1]);
+        if(!(Number.isNaN(x))){
+            col1_data.push(x);
+        }
+        
+    }
+    
+    console.log(col1_data);
+    
+    
+    var filter_col1=[];
+    for(var x=0;x<col1_data.length*0.1;x++){
+        filter_col1[x]=col1_data[Math.floor(Math.random() * col1_data.length)];
+
+    }
+    
+    // Calculate size of first array. 
+    var t_mean=ss.mean(col1_data);
+    var t=ss.tTest(filter_col1,t_mean);
+    
+
+
+    var p=jStat.ttest( t, col1_data.length*0.1, 2);
+    
+
+
+    var showtest=document.getElementById('frequencyTablesContainer');
+    var T_Test = new Table();
+    T_Test.addRow();
+    T_Test.addCol('T Test (t value)');
+    T_Test.addCol('T Test (p value)');
+    T_Test.addRow();
+    T_Test.addCol(t);
+    T_Test.addCol(p);
+
+    showtest.appendChild(T_Test.getTable());
 
 
 });
@@ -243,16 +316,23 @@ T_Test_Btn.addEventListener('click',function(){
         var Temp = data[i].split(",");
 
         x = parseInt(Temp[selectedCol1]);
-        col1_data.push(x);
+        if(!(Number.isNaN(x))){
+            col1_data.push(x);
+        }
+        
     }
     
     for (var i = 1; i < rows; i++) {
         var Temp = data[i].split(",");
 
         x = parseInt(Temp[selectedCol2]);
-        col2_data.push(x);
+        if(!(Number.isNaN(x))){
+            col2_data.push(x);
+        }
     }
+    console.log(col1_data);
     
+    console.log(ss.mean(col1_data));
     var filter_col1=[];
     var filter_col2=[];
     for(var x=0;x<col1_data.length*0.1;x++){
@@ -264,13 +344,13 @@ T_Test_Btn.addEventListener('click',function(){
     // Calculate size of first array. 
     
     var t=CalculateTTest(filter_col1,filter_col2);
-
-
-    var p=jStat.ttest( t, 10, 2);
-
-
-    console.log(filter_col1);
     
+
+
+    var p=jStat.ttest( t, col1_data.length*0.1, 2);
+    
+
+
     var showtest=document.getElementById('frequencyTablesContainer');
     var T_Test = new Table();
     T_Test.addRow();
@@ -284,16 +364,23 @@ T_Test_Btn.addEventListener('click',function(){
 
 
 });
+
+
 var Anova_Btn=document.getElementById("anova_btn");
 Anova_Btn.addEventListener('click',function(){
     var col1=document.getElementById("col1_anova_input").value;
     var col2=document.getElementById("col2_anova_input").value;
+
+
+
+    // test,Cullas,ahsjahjsha
+   
     var data = allTextLines;
     var rows = data.length;
     var selectedCol1,selectedCol2;
     var heading = data[0].split(",");
 
-
+    
     for (var i = 0; i < rows; i++) {
         if (col1 == heading[i]) {
             selectedCol1 = i;
@@ -309,6 +396,7 @@ Anova_Btn.addEventListener('click',function(){
 
 
     var x = "";
+    //Arrays
     var col1_data = [];
     var col2_data = [];
 
@@ -325,24 +413,38 @@ Anova_Btn.addEventListener('click',function(){
         x = parseInt(Temp[selectedCol2]);
         col2_data.push(x);
     }
+
+
     
     var filter_col1=[];
     var filter_col2=[];
-    for(var x=0;x<col1_data.length*0.1;x++){
-        filter_col1[x]=col1_data[Math.floor(Math.random() * col1_data.length)];
-        filter_col2[x]=col2_data[Math.floor(Math.random() * col2_data.length)];
+    for(var x=0;x<col1_data.length;x++){
 
+        if(!(Number.isNaN(col1_data[x]))){
+            filter_col1[i]=col1_data[x];
+            i++;
+        }
+ 
     }
+    i=0;
+    for(var x=0;x<col2_data.length;x++){
+
+        if(!(Number.isNaN(col2_data[x]))){
+            filter_col2[i]=col2_data[x];
+            i++;
+        }
+ 
+    }
+    //2,78,1,221
     
     // Calculate size of first array. 
     
     var t=jStat.anovafscore(filter_col1,filter_col2);
 
-
     var p=jStat.anovaftest(filter_col1,filter_col2);
 
 
-    
+
     var showtest=document.getElementById('frequencyTablesContainer');
     var T_Test = new Table();
     T_Test.addRow();
@@ -356,6 +458,15 @@ Anova_Btn.addEventListener('click',function(){
 
 
 });
+
+
+
+
+
+
+
+
+
 function histogram(f, c, interval, max, heading) {
 
     var data = [];

@@ -8,7 +8,12 @@
     <title>Statistics by File Data</title>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        
+
         <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+
+
     <link rel="shortcut icon" href="img/logo_pHS_icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/byFile.css">
@@ -23,7 +28,7 @@
             <a href="#" class="nav-item" active-color="orange" id="covid">COVID-19 </a>
             <a href="#" class="nav-item" active-color="green" id="heart_disease">Heart Disease</a>
             <a href="#" class="nav-item" active-color="blue"id="maleria">Maleria</a>
-            <a href="#" class="nav-item" active-color="red"id="hiv">HIV</a>
+            <a href="#" class="nav-item" active-color="red"id="sleep_disorder">Sleep Disorder</a>
             <a href="#" class="nav-item" active-color="rebeccapurple"id="cancer">Cancer</a>
         
             <span class="nav-indicator"></span>
@@ -87,7 +92,16 @@
 
     <div class="t_test_input">
         <div  class="selectColumn">
-            <h2 for="">  Apply T Test</h2> <br>
+            <h2 for="">  Apply T Test (OneSample)</h2> <br>
+            <input type="text" name="column" placeholder="Any Column Name 1" id="col1_t_test_simple_input"/><br>
+            <button type="submit" class="button" id="t_test_simple_btn">Calculate</button>
+        </div>
+       
+        
+    </div>
+    <div class="t_test_input">
+        <div  class="selectColumn">
+            <h2 for="">  Apply T Test (TwoSample)</h2> <br>
             <input type="text" name="column" placeholder="Any Column Name 1" id="col1_t_test_input"/>
             
             <input type="text" name="column"  placeholder="Any Column Name 2" id="col2_t_test_input" /><br>
@@ -96,6 +110,7 @@
        
         
     </div>
+    
 
     <div class="anova_input">
         <div  class="selectColumn">
@@ -121,6 +136,9 @@
     <script src="js/table.js"></script>
     <script src="js/histogram.js"></script> 
     <script src="js/navbar.js"></script>
+    <script src="js/simple-statistics.min.js"></script>
+    <script src='https://unpkg.com/simple-statistics@7.1.0/dist/simple-statistics.min.js'>
+    </script>
 
 </body>
 
